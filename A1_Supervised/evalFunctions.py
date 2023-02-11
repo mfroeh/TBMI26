@@ -12,11 +12,10 @@ def calcAccuracy(LPred, LTrue):
     """
 
     # --------------------------------------------
-    corr = 0
-    for truth, pred in zip(LPred, LTrue):
-        if truth == pred:
-            corr += 1
-    acc = corr / len(LPred)
+    # === Your code here =========================
+    # --------------------------------------------
+    
+    acc = np.count_nonzero(LPred == LTrue) / len(LTrue)
 
     # ============================================
     return acc
@@ -35,15 +34,16 @@ def calcConfusionMatrix(LPred, LTrue):
     """
 
     # --------------------------------------------
-    classes = np.unique(LTrue)
-    nClasses = len(classes)
+    # === Your code here =========================
+    # --------------------------------------------
 
-    # cM[i, j]: How many times we predicted i, when it was j
+    nClasses = len(np.unique(LTrue))
     cM = np.zeros((nClasses, nClasses), dtype=np.int32)
     for pred, truth in zip(LPred, LTrue):
         cM[pred, truth] += 1
 
     # ============================================
+
     return cM
 
 
@@ -59,11 +59,11 @@ def calcAccuracyCM(cM):
     """
 
     # --------------------------------------------
-    total = 0
-    for i in range(cM.shape[0]):
-        for j in range(cM.shape[1]):
-            total += cM[i, j]
-    acc = sum(np.diag(cM)) / total
+    # === Your code here =========================
+    # --------------------------------------------
+    
+    acc = np.sum(np.diag(cM)) / np.sum(cM)
 
     # ============================================
+    
     return acc
